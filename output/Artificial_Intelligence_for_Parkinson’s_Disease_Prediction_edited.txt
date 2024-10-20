@@ -1,0 +1,872 @@
+Artificial Intelligence for Parkinson’s Disease Prediction
+
+Soham Ravindran¹, Kaushal Kulkarni², Kaustubh Damle³ Dr. Mousami Turuk⁴, Manisha Sagade⁵
+Pune Institute of Computer Technology 411012, Pune, India
+1sohamraveendran@gmail.com, ²k7kulkarni@gmail.com, ³damlekaustubh11@gmail.com ⁴mpturuk@pict.edu, ⁵manishajs@pict.edu
+
+
+Abstract
+
+Parkinson's disease (PD) is a pervasive neurodegenerative disorder with a diverse clinical presentation and a complex etiological landscape. A comprehensive introduction to the current state of PD research, diagnosis, and management, emphasizing the need for early detection and personalized treatment strategies is presented in this paper. Recognizing the multifactorial nature of PD, the genetic and environmental risk factors, highlighting the role of genetics in monogenic and polygenic PD are explored.
+Furthermore, the clinical diagnosis of PD, encompassing both motor and non-motor symptoms, and underscore the significance of a prolonged prodromal phase preceding clinical manifestations are discussed. The importance of personalized management, including pharmacological and non-pharmacological interventions, is also emphasized. In the quest for disease modification, the potential of emerging therapies and the ongoing research into the genetic basis of PD is explored. Notably, the promising role of machine learning techniques, including Convolutional Neural Networks (CNN), Artificial Neural Networks (ANN), K-Nearest Neighbors (KNN), and fuzzy logic, in early PD detection and diagnosis is investigated. By leveraging these advanced computational approaches, there is potential to revolutionize PD diagnosis, providing earlier interventions and tailored treatment strategies. This paper sets the stage for a comprehensive examination of the application of machine learning in PD research and clinical practice. By amalgamating existing knowledge and cutting-edge technologies, the aspiration of this paper is to advance our understanding and management of Parkinson's disease, ultimately improving the lives of those affected by this challenging condition.
+
+
+Keywords: SVM, KNN, ANN, Predictive analytics, Voice datasets, CNN, Fuzzy KNN, Fuzzy c-means.
+
+1  Introduction
+Parkinson's Disease (PD) is a multifaceted and progressive neurodegenerative disorder characterized by a range of clinical manifestations. While its increasing global prevalence has raised concerns resembling pandemic trends, it's crucial to note that PD is fundamentally distinct as it is non-infectious in origin. Although genetic factors contribute to some PD cases, a significant proportion is attributed to multifactorial causes. Current research indicates that around 3–5% of PD cases are linked to specific known PD genes, making them monogenic, while 16–36% of the heritable risk of non-monogenic PD can be explained by 90 genetic risk variants. Other noteworthy risk factors include a family history of PD, the presence of tremors, constipation, and non-smoking status, each conferring a two-fold or greater risk of developing the disease.
+The clinical diagnosis of PD primarily relies on observable motor symptoms, including bradykinesia (slowness of movement) and the presence of rest tremor, rigidity, or both. However, the clinical presentation extends beyond motor deficits to encompass a variety of non-motor symptoms, making
+
+the diagnostic process multifaceted and challenging. To provide accurate prognostic counseling, one must understand the diverse subtypes of PD, as the disease's progression can vary significantly among individuals. Notably, PD often follows a prolonged prodromal phase characterized by subtle symptoms that precede clinical manifestations, which may become more clinically relevant with the advent of disease-modifying treatments.
+The management of PD is highly individualized, emphasizing the need for personalized treatment approaches. For individuals with disability due to PD, timely initiation of symptomatic therapy, often beginning with levodopa, is recommended. Optimal PD management extends beyond medication, incorporating an expanding array of non-pharmacological interventions to enhance patients' quality of life.
+Presently, there are no therapies capable of halting or slowing the progressive nature of PD. Nevertheless, ongoing research into the genetic underpinnings and mechanisms of neuronal degeneration has yielded promising insights, with several potential disease-modifying strategies in various stages of development and evaluation. Machine learning techniques have recently emerged as powerful tools in healthcare, offering the potential to enhance early PD detection, refine diagnosis, and personalize treatment strategies based on individual disease profiles.
+This research paper aims to provide a comprehensive overview of PD, highlighting its multifaceted nature, clinical diagnosis, and management, and ongoing efforts to develop disease-modifying therapies. It also explores the potential of machine learning as a promising avenue for early PD detection and its potential to revolutionize Parkinson's disease research and clinical practice. By synthesizing existing knowledge and emerging technologies, we aim to shed light on the role of machine learning in advancing our understanding and management of Parkinson's disease.
+
+2  Data Preprocessing
+2.1 Synthetic Minority Over-sampling Technique (SMOTE)
+SMOTE[13] can be applied when there are more examples of one class in the dataset than samples of other classes. One method for addressing unequal classes is to oversample samples in the minority class. This can be achieved by using duplicate instances from the minority class in the training dataset. Although it might balance out the distribution of classes, this doesn't reveal anything new. Another technique for enhancing minority data based on prior samples is called SMOTE, or Synthetic Minority Oversampling Technique. Using close features, the SMOTE method creates a linear link and then chooses a new sample from the minority class along that line.
+
+2.2 Hyperparameter tuning (GridSearchCV)
+Variables known as hyperparameters are typically set by the user while creating the machine learning model[1]. Utilizing GridSearchCV to find the ideal hyperparameter values is necessary to obtain the greatest performance out of the model. The simplest search technique that yields the most precise predictions is grid search. Because each trial in a grid search runs independently without regard to time sequence, it is easy to conduct in parallel (Yu and Zhu, 2020). It primarily accepts arguments, such as estimator, parameter grid, and CV. The descriptions of each argument are as follows:Estimator: the item being utilized for the estimatorA K-fold cross-validation's folds are represented by an integer in the parameter grid, which is a list of parameter values together with their names.
+
+2.3 Principal Component Analysis (PCA)
+Essentially, principal component analysis is a statistical process that transforms a collection of observations of variables that may be correlated into a corresponding collection of values for variables that are linearly uncorrelated. All of the primary components are orthogonal to one another and are selected so as to describe the majority of the remaining available variance. The first principal component has the highest variance among all the other principal components.
+
+PCA is used to determine the relationships between variables in the data. It helps with data visualization and interpretation. Reduction in the number of variables simplifies additional analysis. It is frequently used to show genetic relatedness and distance between populations.
+Basically, a square symmetric matrix is used for them. It might be a matrix with only sums of squares and cross-products. A matrix of correlation or covariance. If the variance of each variable varies significantly, a correlation matrix is employed.
+In order to maximize variance from the variables, PCA essentially looks for a linear combination of variables. After this procedure is finished, it is eliminated and a new linear combination that explains the largest percentage of residual variance—basically, orthogonal factors—is found. This approach analyzes the overall variance [13].
+
+2.4 Data reduction: Autoencoder
+An autoencoder[3] is a type of neural network design that uses feature compression to attempt to learn a deep representation of the input. In order to do this, a symmetric design with the same number of input neurons as output neurons and fewer neurons in the middle layer than in the input and output layers is constructed. Latent space refers to this intermediate layer as a bottleneck. The network is able to learn a compact and deep representation of the data in the latent space when one attempts to extract the net's output directly from the input. The term "encoder" refers to any layer that is present prior to the bottleneck, while "decoder" refers to all layers that are present thereafter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig. 1. Layers in Autoencoder.
+
+3  Machine Learning algorithms and Techniques
+3.1 Support Vector Machine (SVM)
+One potent machine learning technique that is frequently used in the field of medical diagnostics, particularly the diagnosis of Parkinson's disease (PD), is Support Vector Machine (SVM)[9]. Based on a variety of input data sources, including clinical, genetic, and imaging data, SVM's ability to do binary
+
+classification has shown to be useful in differentiating between people with Parkinson's disease (PD) and healthy controls.
+SVM is a member of a new class of learning systems that draws on recent developments in statistical learning theory. This data algorithm works with both linear and non-linear data. By transforming the initial data into a higher dimension, machine learning techniques to detect Parkinson's disease using voice signal features may be able to use this information to build a hyperplane for data separation utilizing support vectors, which are essential training tuples[2].
+
+
+3.2 K- Nearest Neighbour (KNN)
+Parkinson's disease (PD) identification is one of the many uses for the well-liked machine learning technique K-Nearest Neighbors (KNN)[2]. PD is a multifaceted neurodegenerative illness that manifests as both motor and non-motor symptoms. Based on unique input variables, including clinical evaluations, genetic markers, or imaging data, KNN is especially well-suited for binary classification tasks, which makes it a useful tool for differentiating between people with PD and healthy controls.
+KNN is an instance-based learning algorithm, which means it makes predictions based on the similarity of input data points to training examples. In the context of PD detection, KNN assesses the similarity between individuals' feature vectors to determine their PD status.
+The choice of the "K" value, representing the number of nearest neighbors to consider, is a critical aspect of KNN. Proper selection of K can significantly impact the algorithm's performance and should be determined through cross-validation or other optimization techniques.
+
+3.3 Convolution Neural Network (CNN)
+CNNs are designed to automatically learn hierarchical features from images. This ability enables them to capture complex patterns and relationships in medical images, such as brain scans or pathological tissue samples, that might be indicative of PD[33].
+CNNs use convolutional layers to scan images at multiple spatial scales, allowing them to detect features of varying sizes. This is particularly advantageous for capturing abnormalities in medical images that can manifest at different scales.
+For both purposes, an MLP architecture is employed, which underwent several modifications to tailor it to our needs.
+An input layer, an output layer, and one or more hidden layers make up this neural network [11]. Multiple layers are commonly used in deep learning[4] to efficiently capture the complex patterns found in the input data. Every neuron in layer n of an MLP is tightly coupled to every other neuron in layer n + 1[5].
+When it comes to binary classification, like this one, the most common method uses one output neuron in conjunction with a sigmoid activation function.
+This function calculates the probability of the input, denoted as x, belonging to the positive class and is expressed as:
+
+f(x) = 1 / (1 + e^(-x))
+
+In the case of regression, the activation function for the output layer is defined as "RELU," following the equation:
+
+f(x) = max(0, x)
+
+VGG16 stands as a prominent architecture, highly acclaimed for its exceptional performance in the ImageNet Large Scale Visual Recognition Challenge (ILSVRC) of 2014, where it achieved an impressive test accuracy of 92.7% on the ImageNet dataset. This model comprises a total of 16 layers, thoughtfully organized into various components, including:
+
+Convolutional Layers: VGG16 incorporates a total of 13 convolutional layers, responsible for extracting intricate features from the input data.
+Fully Connected Layers: The model includes 3 fully connected layers, enabling it to make sense of the features extracted by the earlier layers and establish complex relationships.
+Max Pooling Layers: In addition, there are 5 max pooling layers that downsample the spatial dimensions of the data, aiding in feature reduction and abstraction.Softmax Layer: To adapt the architecture for the specific binary classification task at hand, a final Softmax activation layer has been added.
+Throughout the hidden layers of this model, the Rectified Linear Unit (ReLU) serves as the activation function. The utilization of ReLU contributes to accelerated learning and mitigates the issue of vanishing gradients, enhancing the model's training efficiency.
+Inception-V3, as extensively applied in image classification tasks, emerges as a prominent model [28]. This model exhibits a distinctive composition, encompassing both symmetric and asymmetric components. Within its architecture, you'll find an array of essential layers, including convolutional layers, average pooling layers, max pooling layers, and fully connected layers.
+Notably, Inception-V3 boasts an impressive 42-layer architecture and encompasses approximately 12 million  parameters.  Despite  its depth and complexity, this model demonstrates exceptional computational efficiency, surpassing the efficiency of the VGGNet model
+
+3.4 FUZZY KNN
+Fuzzy k-Nearest Neighbors (Fuzzy KNN)[7] is an extension of the traditional k-Nearest Neighbors (KNN) algorithm, designed to handle uncertainty and imprecision in classification tasks. It incorporates fuzzy[6] set theory into the KNN framework, allowing it to make more nuanced decisions when assigning data points to classes. Fuzzy KNN is particularly useful when dealing with datasets that exhibit overlapping or ambiguous boundaries between classes.
+Fuzzy algorithm takes a training set X with labeled patterns and a test pattern y as input. Its goal is to determine the class label for y and provide a confidence level for each class label. It does this by finding the k nearest neighbors in the training set to the test pattern y based on Euclidean distance. If a nearest neighbor is closer to y than any previous ones, it replaces the farthest neighbor. Then, membership values for each class are computed, and the class label for y is assigned to the one with the highest membership value[30].
+
+3.5 Fuzzy C-Means
+A unique viewpoint on data clustering is provided by fuzzy clustering, often known as soft clustering or soft k-means. Unlike traditional clustering methods, such as K-means, fuzzy clustering allows data points to have a nuanced relationship with multiple clusters rather than rigidly assigning them to a single cluster[29][30].
+In contrast to traditional clustering techniques, fuzzy clustering introduces a more flexible approach to data grouping. Instead of rigidly assigning each data point to a single cluster, as seen in conventional clustering methods like K-means, fuzzy clustering acknowledges that data points may exhibit varying degrees of affiliation with multiple clusters simultaneously. This nuanced perspective allows for a more accurate representation of the inherent complexity and uncertainty present in many real-world datasets.
+By adopting fuzzy clustering, analysts can capture the subtleties and nuances within their data, leading to more comprehensive and insightful cluster assignments. This approach proves particularly valuable in scenarios where data points may not fit neatly into discrete clusters and instead possess multifaceted relationships with various cluster centroids.
+In summary, fuzzy clustering represents a sophisticated and versatile approach to cluster analysis, enabling a more nuanced understanding of data relationships. It embraces the idea that data points can belong to multiple clusters to varying degrees, offering a powerful tool for tackling complex datasets with intricate similarities and affiliations.
+
+4  Performance Metrics of various Machine Learning algorithms
+4.1 Recall
+The recall[2] is a measure of how well our model identifies True Positives. Thus, recall informs us how many people were accurately identified as having Parkinson’s disease out of all those who truly have Parkison’s disease.
+
+Recall = TruePositive/(TruePositive + FalseNegative)
+
+4.2 Precision
+The ratio of True Positives to all Positives is defined as precision[2]. It would be the proportion of patients correctly diagnosed as having Parkinson's disease out of all patients who really have it for our issue statement.
+
+Precision = TruePositive/ (TruePositive + FalsePositive)
+
+4.3 Accuracy
+The ratio of the overall number of accurate predictions to the total number of forecasts is known as accuracy[4].
+
+Accuracy=(True Positive + True Negative) / (True Positive + True Negative + False Positive + False Negative).
+
+
+4.4 Specificity
+Specificity[4] is a statistical measure that quantifies the proportion of true negatives correctly predicted as negatives. In other words, it represents the accuracy in identifying actual negative cases as negative (referred to as true negatives). Conversely, there is a complementary proportion of actual negatives incorrectly predicted as positive (known as false positives), which can also be described as the false positive rate[28].
+
+Specificity = TrueNegative/( TrueNegative + FalsePositive)
+= probability of a negative test given that the patient is well
+
+4.5 Confusion matrix
+A confusion matrix serves as a tabular representation that summarizes a machine learning[20] model's performance when evaluated against a set of test data. Its primary application lies in assessing the effectiveness of classification models, specifically those designed to predict categorical labels for input instances[24].
+Within this matrix, one can observe and quantify the following key metrics produced by the model during its evaluation on the test data:
+True Positives (TP) are occasions in which the model forecasts the positive class properly. True Negatives (TN) are instances in which the model correctly forecasts the negative class.
+False Positives (FP) occur when the model forecasts the positive class wrongly (a sort of inaccuracy). False Negatives (FN) are situations where the model forecasts the negative class incorrectly (another form of mistake).
+The confusion matrix has the shape of a 2x2 table in the context of binary classification. In the case of multi-class classification, however, the dimensions of the matrix correspond to the count of unique classes contained in the collected dataset. For n classes, the matrix takes the form of a nXn table, allowing for a thorough examination of the model's performance across multiple class differences.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig. 2. Training the supervised ML traffic classifier
+
+The confusion matrix assists in computing various model parameters like accuracy, precision, and more.
+It not only reveals classifier errors but also categorizes them as either type one or type two errors.
+
+
+Table 1. Summarized citation of research articles that highlight different Deep Learning and Machine Learning algorithms
+
+
+
+Authors Mathur et al.[1]
+
+
+
+
+
+
+
+
+
+
+
+Zhang et al.[5]
+
+
+
+
+
+
+
+Aşuroğlu et al.[4]
+Methodolo gy
+SVM, KNN, ANN
+
+
+
+
+
+
+
+
+
+
+TQWT-DR SN,
+WPT-DRS N
+
+
+
+Combinati on of CNN and LWRF
+Features
+
+●  WEKA (Waikato Environment for Knowledge Analysis) will be used to construct data mining methods for preprocessing, classification, clustering, and result analysis.
+●  To evaluate the worth of an attribute, we used the "cfsSubsetEval" attribute evaluator and the "BestFirstSearch'' technique, which takes into account the particular predictive ability of each feature.
+●  Combining time–frequency analysis with deep learning
+●  To categorise four types of clinical sleep EEG data, the wavelet packet transform with deep residual shrinkage network (WPT-DRSN) is used.
+●  Multiple gait sensors that measure GRF value are used to process gait signals.
+●  The proposed framework is a hybrid deep learning strategy that uses data relations by combining CNN and LWRF architectures.
+Dataset type Voice datasets
+
+
+
+
+
+
+
+
+
+
+
+Signal dataset: EEG
+
+
+
+
+
+
+Signal dataset: Physionet Gait in PD
+Performan ce
+Accuracy: 91.88%
+
+
+
+
+
+
+
+
+
+
+
+Binary classificatio n: 99.92% WPT-DRS N: 97.81%
+and 92.59%
+Combinati on of CNN and LWRF: 99.5%
+
+
+
+
+
+
+
+
+Cai et al.[7]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Alshammri et al.[2]
+
+
+
+
+
+
+García-Ordás et al.[3]
+
+
+
+
+
+
+
+Dheer et al.[12]
+
+
+
+
+
+
+
+FKNN,cha otic bacterial foraging optimizati on with Gauss mutation (CBFO),
+bacterial foraging algorithm (BFO),10
+fold cross validation
+KNN, SVM, DT,
+RF and MLP
+
+
+Multilayer perceptro n, autoencod er
+
+
+Acoustic characteri stics KNN, NN, LDA,
+Decision tree classifier, GB, UPDRS
+are examples of statistical pooling.
+●  This hybrid deep learning model outperformed previous regression models by translating time and frequency information from GRF sensors and feeding them into CNN + LWRF architecture
+●  Using 10 fold cross validation, divide the data into training and testing datasets.
+●  Data is fed into two models: Fuzzy-KNN and CBFO.
+●  CBFO is used for inner model selection based on criteria.
+●  The outer model FKNN, is used to decide and group the data.
+
+
+
+
+
+
+
+●  Used Hyperparameter tuning (GridSearchCV) and Synthetic Minority Over-sampling Technique (SMOTE) to resolve unbalanced data.
+●  Used an autoencoder to split data into  two  sections  to  detect different features.
+●  Send  both  data  to  MLP independently
+●  Combined outputs to get best results
+
+
+●  The  first  stage  is  extracting features from Parkinson's audio dataset.
+●  The second stage involves picking the most important qualities from the  numerous  feature  vectors generated.
+●  The final step is to use data from the  UPDRS,  such  as  motor symptoms,  to  help  identify Parkinson's disease.
+
+
+
+
+
+
+
+Voice dataset
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Signal dataset: Physionet Gait in Parkinson's Disease
+Voice datasets
+:
+https://archive
+.ics.uci.edu/da tasets?search= Parkinsons
+
+Voice datasets: Oxford Dataset
+
+
+
+
+
+
+
+Best results FKNN with CBFO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+KNN best accuracy with 88%
+
+
+
+
+Results : 99.15%
+accuracy (but they had small testing dataset)
+Results: The UPDRS
+settings achieved the highest success rate.
+
+Polat.[13]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Khorasani et al.[15]
+
+
+
+
+
+Shahsavari et al.[17]
+
+
+
+
+
+
+
+
+Kurmi et al.[28]
+
+
+
+
+
+
+
+
+Haq et al.[11]
+
+
+
+
+
+
+
+
+
+
+
+
+Xuchen et al.[14]
+SMOTE,
+Random Forests Classificati on
+
+
+
+
+
+
+
+
+
+
+HMM
+with Gaussian Mixtures
+
+Extreme Learning Machine( ELM) with Hybrid Particle Swarm Optimizati on (PSO)
+CNN
+Model, ensemble method
+
+
+
+
+Logistic Regressio n and Deep Neural Network, Support Vector Machine,
+
+
+XGBoost (Extreme Gradient Boosted
+●  Characteristics  extracted  from voice signals.
+●  Early identification and diagnosis of Parkinson's disease are critical for   understanding   disease progression and therapy planning.
+●  The dataset utilized in this work for Parkinson's disease analysis was  available  from  the  UCI machine learning repository.
+●  The  proposed  hybrid  machine learning approach is divided into two parts: classification and data pre-processing by over-sampling.
+●  In this work, the Hidden Markov Model  (HMM)  using  Gaussian Mixtures  was  used to identify between  Parkinson's  disease patients and healthy participants.
+
+●  Extreme   Machine   Learning (ELM),  a  single  hidden  layer feed-forward neural network, was used.
+●  To  select  relevant  feature components,  Hybrid  Particle Swarm Optimization (PSO) was used.
+●  To forecast Parkinson's disease, ensemble deep learning systems were used.
+●  VGG16, ResNet50, Inception-V3, Xception are the models used.
+●  The   logic-driven   ensemble approach Fuzzy Fusion
+
+
+
+●  Logistic regression, Support vector machines,  and  Deep  Neural Networks were used.
+●  The dataset was divided among 70% training and 30% testing.
+
+
+
+
+
+●  A second-order Taylor expansion on the loss function was used to improve optimisation.
+PD two class dataset: UCI machine learning repository
+
+
+
+
+
+
+
+
+
+
+Data on 16
+healthy and 15 PD
+participants' gaits.
+PD two class dataset: UCI machine learning repository
+
+
+
+
+
+PPMI
+(Parkinson’s Progression Markers Initiative)
+
+
+
+The Parkinson disease dataset
+: UCI machine learning repository
+
+
+
+
+
+
+
+Voice dataset
+Random forest: 87.037%
+Combinati on of SMOTE
+and Random Forest: 94.89%
+
+
+
+
+
+Result: HMM : 90.3%
+
+
+
+ELM
+proves to better than other learning models
+
+
+Accuracy : 98.45%,
+Precision : 98.84%,
+Sensitivity
+: 98.8%,
+Specificity : 97.6%
+Deep neural classificatio n performan ce was superior to typical machine learning classifiers.
+Accuracy : 90.76%.
+
+
+
+
+
+Leung et al.[16]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Noor et al.[33]
+
+
+
+
+
+
+
+
+
+
+
+
+
+Alam et al.[21]
+
+
+
+
+
+
+Pepa et al.[29]
+
+
+
+
+
+Murthy et al.[31]
+Algorithm
+)
+
+Deep learning, ensemble methods
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Image registratio n, deep learning
+
+
+
+
+
+
+
+
+
+Random Forest
+
+
+
+
+
+Fuzzy logic based system
+
+Neural Networks
+●  Incorporated  regularization  to control  model  complexity  and prevent overfitting
+●  A comparison was made between eleven different networks trained in Stage 1 for evaluating image feature extraction techniques.
+●  InceptionV3,      ResNet50, DenseNet121,  and  VGG16,  all pre-trained  on ImageNet, were employed by these networks to extract  distinct  sets  of  image features.
+●  A   collection   of   image characteristics  known  as  "All ImageNet imaging features" was also used.
+●  The   MDS-UPDRS-III   and case-specific clinical measures in the network were also used as inputs.
+●  In recent decades, neuroimaging, notably   magnetic   resonance imaging  (MRI),  has  played  a pivotal  role  in  enhancing  our comprehension of brain function and related disorders.
+●  State-of-the-art MRI images have revolutionized the ability to detect neurological issues, facilitated by advanced computational tools and cutting-edge  machine  learning algorithms.
+●  Sorted characteristics using one or more   appropriate   ranker algorithms
+●  Highly ranked features are then utilized by the Random Forest classifier
+●  By integrating data on the freeze index, energy, cadency fluctuation, and the ratio of the derivative of the energy, a fuzzy logic-based technique is produced.
+●  The research combines many CNN designs,    including    the Efficient-Net B0 and Mobile-Net V2 models, as well as a bespoke CNN architecture.
+●  These  architectures  were  first trained on ImageNet before being fine-tuned via transfer learning.
+
+
+
+
+PPMI
+(Parkinson’s Progression Markers Initiative)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dataset : MRI Data
+
+
+
+
+
+
+
+
+
+
+
+10 different datasets
+
+
+
+
+
+Dataset : Freezing of Gait(FOG)
+
+
+Dataset: Gait
+
+
+
+
+MAPE : 18.36%
+MAE : 4.7,
+Pearson’s Correlation Coefficient
+: 0.84.
+
+
+
+
+
+
+
+
+
+
+
+
+
+CNN : 99%
+
+
+
+
+
+
+
+
+
+
+
+
+
+Accuracy : 82.2%
+
+
+
+
+
+Accuracy : 85%
+
+
+
+Deep semantic networks (DNNs) are preferred for test opportuniti es.
+
+
+
+
+
+
+Shinde et al.[26]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Wang et al.[25]
+
+
+
+
+
+Convoluti onal Neural Networks
+
+
+
+
+
+
+
+
+
+
+Multimod al model
+●  By integrating these designs with a bilinear pooling approach, three Bilinear CNN (BCNN) models are created.
+●  Parkinson's disease (PD) is known for  the  loss  of  dopaminergic neurons in the substantia nigra pars compacta (SNc), which makes neuromelanin sensitive magnetic resonance imaging (NMS-MRI) a useful method for detecting SNc abnormalities.
+●  Current  diagnostic  approaches identify   Parkinson's   disease patients from healthy people by estimating contrast ratios of the SNc seen in NMS-MRI images.
+●  The purpose of this study was to address the issue of FOG (freezing of  gait),  which  can  lead  to unintentional falls in patients with PD.
+●  PD patients performed in-place movements  while  researchers captured physiological indicators such as accelerometer and EEG readings.
+●  The research entailed creating a multimodal model that integrated accelerometer data with EEG brain activity,  proving  to  be  more successful in identifying FOG than single-modal models.
+
+
+
+
+
+Dataset : MRI Imaging
+
+
+
+
+
+
+
+
+
+
+
+
+
+Electroenceph alography (EEG) and accelerometer signals
+
+
+
+
+
+Accuracy = 80%
+
+
+
+
+
+
+
+
+
+
+
+
+
+Matthews Correlation Coefficient (MCC) = 0.211
+
+
+5  Conclusion
+This paper summarizes key research with Deep learning and Machine learning techniques to detect Parkinson's disease. It is difficult to collect datasets in the Indian regions owing to the lack of advancements necessary to gather data, thus, frequently the research is relying on freely accessible data. The majority of prior research is concentrated on one form of data, thus opening a wide scope for multi-modal datasets of audio, image and signal characteristics for prediction using advanced tools. The most significant requirement for creating automatic Parkinson's disease prediction is accuracy, and the study shows that there is a need to improve accuracy by utilizing blended mode.
+
+References
+[1] Mathur, R., Pathak, V. and Bandil, D.: 2019. Parkinson disease prediction using machine learning algorithm. In: Emerging Trends in Expert Applications and Security: Proceedings of ICETEAS 2018 (pp. 357-363). Springer Singapore.
+[2] Alshammri, R., Alharbi, G., Alharbi, E. and Almubark, I.: 2023. Machine learning approaches to identify Parkinson's disease using voice signal features. In: Frontiers in Artificial Intelligence, 6, p.1084001.
+[3] García-Ordás, M.T., Benítez-Andrades, J.A., Aveleira-Mata, J., Alija-Pérez, J.M. and Benavides, C.: 2023. Determining the severity of Parkinson’s disease in patients using a multi task neural network. In: Multimedia Tools and Applications, pp.1-16.
+[4] Aşuroğlu, T. and Oğul, H.: 2022. A deep learning approach for parkinson’s disease severity assessment. In: Health and Technology, 12(5), pp.943-953.
+[5] Zhang, R., Jia, J. and Zhang, R.: 2022. EEG analysis of Parkinson's disease using time–frequency analysis and deep learning. In: Biomedical Signal Processing and Control, 78, p.103883.
+[6] Chakraborty, A., Chakraborty, A. and Mukherjee, B.: 2016. Detection of Parkinson’s disease using fuzzy inference system. In: Intelligent Systems Technologies and Applications: Volume 1 (pp. 79-90). Springer International Publishing.
+[7] Cai, Z., Gu, J., Wen, C., Zhao, D., Huang, C., Huang, H., Tong, C., Li, J. and Chen, H.: 2018. An intelligent Parkinson’s disease diagnostic system based on a chaotic bacterial foraging optimization enhanced fuzzy KNN approach. In: Computational and mathematical methods in medicine, 2018.
+[8] Braden, R., Clark, D. and Shenker, S.: 1994. Integrated services in the internet architecture: an overview.
+[9] Ouhmida, A., Raihani, A., Cherradi, B. and Lamalem, Y.: 2022, March. Parkinson's disease classification using machine learning algorithms: performance analysis and comparison. In: 2022 2nd International Conference on Innovative Research in Applied Science, Engineering and Technology (IRASET) (pp. 1-6). IEEE.
+[10]  Pianpanit, T., Lolak, S., Sawangjai, P., Sudhawiyangkul, T. and Wilaiprasitporn, T.: 2021. Parkinson’s disease recognition using SPECT image and interpretable AI: A tutorial. In: IEEE Sensors Journal, 21(20), pp.22304-22316.
+[11]Haq, A.U., Li, J., Memon, M.H., Khan, J., Din, S.U., Ahad, I., Sun, R. and Lai, Z.: 2018, December. Comparative analysis of the classification performance of machine learning classifiers and deep neural network classifier for prediction of Parkinson disease. In: 2018 15th international computer conference on wavelet active media technology and information processing (ICCWAMTIP) (pp. 101-106). IEEE.
+[12]  Dheer, S., Poddar, M., Pandey, A. and Kalaivani, S.: 2023, January. Parkinson's Disease Detection Using Acoustic features from Speech recordings. In: 2023 International Conference on Intelligent and Innovative Technologies in Computing, Electrical and Electronics (IITCEE) (pp. 1-4). IEEE.
+[13]  Polat, K.: 2019, April. A hybrid approach to Parkinson disease classification using speech signal: the combination of smote and random forests. In: 2019 Scientific Meeting on Electrical-Electronics & Biomedical Engineering and Computer Science (EBBT) (pp. 1-3). Ieee.
+[14]  Xuchen, Z., Yong, F. and Peng, W.: 2019, September. Automatically Predicting Severity of Parkinson's Disease Using Model Based on XGBoost from Speech. In: 2019 IEEE International Conference on Signal Processing, Communications and Computing (ICSPCC) (pp. 1-5). IEEE.
+[15]  Khorasani, A. and Daliri, M.R.: 2014. HMM for classification of Parkinson’s disease based on the raw gait data. In: Journal of medical systems, 38, pp.1-6.
+[16]  Leung, K.H., Rowe, S.P., Pomper, M.G. and Du, Y.: 2021. A three-stage, deep learning, ensemble approach for prognosis in patients with Parkinson’s disease. In: EJNMMI research, 11(1), pp.1-14.
+[17]   Shahsavari, M.K., Rashidi, H. and Bakhsh, H.R.: 2016, January. Efficient classification of Parkinson's disease using extreme learning machine and hybrid particle swarm optimization. In: 2016 4th International Conference on Control, Instrumentation, and Automation (ICCIA) (pp. 148-154). IEEE.
+[18]  Thapa, S., Adhikari, S., Ghimire, A. and Aditya, A.: 2020, December. Feature selection based twin-support vector machine for the diagnosis of Parkinson’s disease. In: 2020 IEEE 8th R10 humanitarian technology conference (R10-HTC) (pp. 1-6). IEEE.
+[19]  Bunterngchit, C. and Bunterngchit, Y.: 2022, March. A Comparative Study of Machine Learning Models for Parkinson’s Disease Detection. In: 2022 International Conference on Decision Aid Sciences and Applications (DASA) (pp. 465-469). IEEE.
+
+[20]  Haq, A.U., Li, J.P., Memon, M.H., Malik, A., Ahmad, T., Ali, A., Nazir, S., Ahad, I. and Shahid, M.: 2019. Feature selection based on L1-norm support vector machine and effective recognition system for Parkinson’s disease using voice recordings. In: IEEE access, 7, pp.37718-37734.
+[21]  Alam, M.Z., Rahman, M.S. and Rahman, M.S.: 2019. A Random Forest based predictor for medical data classification using feature ranking. In: Informatics in Medicine Unlocked, 15, p.100180.
+[22]  Gök, M.: 2015. An ensemble of k-nearest neighbours algorithm for detection of Parkinson's disease. In: International Journal of Systems Science, 46(6), pp.1108-1112.
+[23]  Mozhdehfarahbakhsh, A., Chitsazian, S., Chakrabarti, P., Chakrabarti, T., Kateb, B. and Nami, M.: 2021. An MRI-based deep learning model to predict Parkinson’s disease stages. In: medRxiv, pp.2021-02.
+[24]  Shinde, S., Prasad, S., Saboo, Y., Kaushick, R., Saini, J., Pal, P.K. and Ingalhalikar, M.: 2019. Predictive markers for Parkinson's disease using deep neural nets on neuromelanin sensitive MRI. In: NeuroImage: Clinical, 22, p.101748.
+[25]  Wang, Y., Beuving, F., Nonnekes, J., Cohen, M.X., Long, X., Aarts, R.M. and Van Wezel, R.: 2020, July. Freezing of gait detection in Parkinson’s disease via multimodal analysis of EEG and accelerometer signals. In: 2020 42nd Annual International Conference of the IEEE Engineering in Medicine & Biology Society (EMBC) (pp. 847-850). IEEE.
+[26]  Butt, A.H., Cavallo, F., Maremmani, C. and Rovini, E.: 2020, July. Biomechanical parameters assessment for the classification of Parkinson disease using bidirectional long short-term memory. In: 2020 42nd Annual International Conference of the IEEE Engineering in Medicine & Biology Society (EMBC) (pp. 5761-5764). IEEE.
+[27]  Chen, H.L., Huang, C.C., Yu, X.G., Xu, X., Sun, X., Wang, G. and Wang, S.J.: 2013. An efficient diagnosis system for detection of Parkinson’s disease using fuzzy k-nearest neighbor approach. In: Expert systems with applications, 40(1), pp.263-271.
+[28]  Kurmi, A., Biswas, S., Sen, S., Sinitca, A., Kaplun, D. and Sarkar, R.: 2022. An Ensemble of CNN Models for Parkinson’s Disease Detection Using DaTscan Images. In: Diagnostics, 12(5), p.1173.
+[29]  Pepa, L., Ciabattoni, L., Verdini, F., Capecci, M. and Ceravolo, M.G.: 2014, September. Smartphone based fuzzy logic freezing of gait detection in parkinson's disease. In: 2014 IEEE/ASME 10th International Conference on Mechatronic and Embedded Systems and Applications (MESA) (pp. 1-6). IEEE..
+[30]  Chakraborty, A., Chakraborty, A. and Mukherjee, B.: 2016. Detection of Parkinson’s disease using fuzzy inference system. In: Intelligent Systems Technologies and Applications: Volume 1 (pp. 79-90). Springer International Publishing.
+[31]  Murthy, A.S.D., Karthikeyan, T., Jagan, B.O.L. and Kumari, C.U.: 2020. Novel deep neural network for individual re recognizing physically disabled individuals. In: Materials Today: Proceedings, 33, pp.4323-4328.
+[32]  Khachnaoui, H., Chikhaoui, B., Khlifa, N. and Mabrouk, R.: 2023. Enhanced Parkinson’s Disease Diagnosis through Convolutional Neural Network Models Applied to SPECT DaTSCAN Images. In: IEEE Access.
+[33]  Noor, M.B.T., Zenia, N.Z., Kaiser, M.S., Mamun, S.A. and Mahmud, M.: 2020. Application of deep learning in detecting neurological disorders from magnetic resonance images: a survey on the detection of Alzheimer’s disease, Parkinson’s disease and schizophrenia. In: Brain informatics, 7, pp.1-21.
