@@ -35,7 +35,7 @@ Initial stage working demo: https://drive.google.com/file/d/1bZftENO0wlf9DJcHVDg
 
 ### Project setup
 
-> The first thing to do is to clone the repository: (https://github.com/k7kaushal/PaperInsight.git) <br>
+> The first thing to do is to clone the repository: (https://github.com/Gaurav24958/PaperInsight.git) <br>
 > Install requirements using: <br>
 `pip install -r requirements.txt`
 > Once pip has finished installing the requirements:
